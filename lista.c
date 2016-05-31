@@ -61,6 +61,35 @@ void insere(alunoPtr *alInicial, char n[], int i){
 	alunoAtual    = *alInicial;
 	
 	if (novoAluno != NULL){
+		while((alunoAtual ! = NULL)&&(i > alunoAtual->idade)){
+			alunoAnterior = alAtual;
+			alunoAtual = alunoAtual->proximoAluno;
+		}
+		if (alunoAnterior == NULL){
+			novoAluno ->proximoAluno = *alInicial;
+			*alInicial = novoAluno;
+		}
+		else{
+			alunoAnterior->proximoAluno = novoAluno;
+			novoAluno->proximoAluno     = alunoAtual;
+		}
 		
+	}
+	else{
+		printf("Nao foi possivel inserir um novo aluno:\nMemoria insuficiente!\n");
+		
+	}
+}
+void imprime (alunoPtr alAtual){
+	if (alAtual != NULL){
+		printf("Listagem dos alunos\n");
+		while(alAtual !=NULL){
+			printf("Aluno:%s\nIdade: %d\n",alAtual->nome, alAtual->idade);
+			alAtual = alAtual->proximoAluno;
+		}
+		printf("Fim da lista\n");
+	}
+	else{
+		printf("A lista esta vazia\n");
 	}
 }
